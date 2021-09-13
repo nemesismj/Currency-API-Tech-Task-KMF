@@ -1,0 +1,6 @@
+{
+  "databaseUrl": "sqlserver://kursUser:kursPswd@localhost:1400/?charset=utf8",
+  "host": "localhost",
+  "port": ":8080",
+  "logLevel": "debug"
+}

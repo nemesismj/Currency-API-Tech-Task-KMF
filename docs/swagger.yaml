@@ -1,0 +1,81 @@
+basePath: /
+definitions:
+  model.ErrorResponse:
+    properties:
+      error:
+        type: string
+    type: object
+  model.RCurrency:
+    properties:
+      a_date:
+        type: string
+      code:
+        type: string
+      id:
+        type: integer
+      title:
+        type: string
+      value:
+        type: number
+    type: object
+  model.SuccessResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/model.RCurrency'
+        type: array
+      success:
+        type: boolean
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: API server for TechTask Application
+  title: TechTask App api
+  version: "1.0"
+paths:
+  /api/v1/currency/{date}/{code}:
+    get:
+      description: Получение списка r_currency, pathvariable code  не обязательный
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.RCurrency'
+            type: array
+        "204":
+          description: No content
+          schema:
+            type: string
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/model.ErrorResponse'
+      summary: RCurrencies list
+      tags:
+      - List of rcurrencies
+  /api/v1/currency/save/{date}:
+    get:
+      description: создание r_currency на основе данных с api
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.SuccessResponse'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/model.ErrorResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/model.ErrorResponse'
+      summary: RCurrency create
+      tags:
+      - create a new rcurrencies
+swagger: "2.0"
